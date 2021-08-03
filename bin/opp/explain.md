@@ -167,3 +167,56 @@ So in Computer programming, Polymorphism is generally used to reduce way of expr
 In Dart, we have only runtime(Method Overrding) polymorphism which mean we can not use compile time polymorphism in Dart.A Compile time polymorphism mean method overlaoding.
 
 ![alt](https://www.scientecheasy.com/wp-content/uploads/2020/02/java-polymorphism.png)
+
+```
+abstract class PkWidget implements RenderingEngine {
+  String name;
+  void enabele() {
+    print('enable');
+  }
+
+  void disable() {
+    print('disable');
+  }
+
+  @override
+  void render() {
+    print('Render');
+  }
+}
+
+class PkTextWidget extends PkWidget {
+  @override
+  void render() {
+    print('Render text widget');
+  }
+}
+
+class PkTextButton extends PkWidget {
+  @override
+  void render() {
+    print('Render button widget');
+  }
+}
+
+abstract class RenderingEngine {
+  void render() {}
+}
+
+```
+
+```
+
+
+import 'opp/pk_widget.dart';
+
+void main() {
+renderComponet(PkTextWidget());
+renderComponet(PkTextButton());
+}
+
+dynamic renderComponet(PkWidget pkWidget) {
+  return pkWidget.render();
+}
+
+```

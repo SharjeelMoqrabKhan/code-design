@@ -1,4 +1,4 @@
-class PkWidget {
+abstract class PkWidget implements RenderingEngine {
   String name;
   void enabele() {
     print('enable');
@@ -7,16 +7,27 @@ class PkWidget {
   void disable() {
     print('disable');
   }
+
+  @override
+  void render() {
+    print('Render');
+  }
 }
 
 class PkTextWidget extends PkWidget {
-  void renderingText() {
-    print('rendering text');
+  @override
+  void render() {
+    print('Render text widget');
   }
 }
 
 class PkTextButton extends PkWidget {
-  void renderingButton(){
-    print('rendering button');
+  @override
+  void render() {
+    print('Render button widget');
   }
+}
+
+abstract class RenderingEngine {
+  void render() {}
 }

@@ -1,7 +1,12 @@
+
+
 import 'opp/pk_widget.dart';
 
 void main() {
-var text = PkTextWidget();
-text.name = 'Sharjeel';
-text.renderingText();
+renderComponet(PkTextWidget());
+renderComponet(PkTextButton());
+}
+
+dynamic renderComponet(PkWidget pkWidget) {
+  return pkWidget.render();
 }
