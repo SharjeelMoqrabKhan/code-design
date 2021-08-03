@@ -1,12 +1,11 @@
-
-
-import 'class-abstract/abstract-class/Person.dart';
+import 'opp/abstraction/bank.dart';
 
 void main() {
-  // var person1 = Person(name: 'Sharjeel',age: 25,job: 'Software Engineer');
-  // person1.walk();
-
-  var se1=Software(name: 'sharjeel',age: 25,job: 'SE1');
-  se1.work();
- 
+var bank = Bank(); 
+bank.deposit(500);
+print(bank.getBalance());
+bank.withdraw(475.50);
+print(bank.getBalance());
+bank.deposit(60);
+print(bank.getBalance());
 }
