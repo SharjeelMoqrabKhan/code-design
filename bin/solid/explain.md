@@ -162,3 +162,123 @@ void main() {
 }
 
 ```
+# Liskov substitution principle
+```
+Let q(x) be a property provable about objects of x of type T. Then q(y) should be provable for objects y of type S where S is a subtype of T.
+```
+
+* All this is stating is that every subclass/derived class should be substitutable for their base/parent class. 
+
+suppose we have two classes one is ractangle and second is square. squre is a subclass of rectangle.In this case we can use Liskov substitution principle to check if the square is substitutable for rectangle or not.
+
+```
+class Rectangle {
+  num _heigth;
+  num _width;
+
+  void setWidth(num value) {
+    _width = value;
+    _heigth = value;
+  }
+
+  void setHeight(num value) {
+    _heigth = value;
+    _width = value;
+  }
+
+  num get width => _width;
+  num get heigth => _heigth;
+}
+
+class Sequre extends Rectangle {
+  @override
+  num _heigth;
+  @override
+  num _width;
+
+  @override
+  void setWidth(num value) {
+    _width = value;
+  }
+
+  @override
+  void setHeight(num value) {
+    _heigth = value;
+  }
+
+  @override
+  num get width => _width;
+  @override
+  num get heigth => _heigth;
+}
+
+void main() {
+  var sequre = Sequre();
+  sequre.setHeight(100);
+  sequre.setWidth(200);
+  print(sequre.heigth);
+  print(sequre.width);
+
+ var rectangle = Rectangle();
+ rectangle.setHeight(100);
+ print(rectangle.heigth);
+ print(rectangle.width);
+}
+```
+Output will be
+
+```
+100 200
+100 100
+```
+
+it's all about a case which is breaking the principle of Liskov substitution principle.cuase we are not getting same output for both rectangle and square mean we are not substitutable for each other.
+
+so there is way to solve this problem and implement the principle of Liskov substitution principle.
+
+```
+class Shape {
+  num heigth;
+  num width;
+}
+
+class Rectangle extends Shape {}
+
+class Sequre extends Shape {}
+```
+
+```
+import 'solid/shape2.dart';
+
+void main() {
+  var sequre = Rectangle();
+  sequre.heigth=220;
+  sequre.width=200;
+  print(sequre.heigth);
+  print(sequre.width);
+
+}
+```
+
+```
+Output
+220  200
+```
+
+```
+import 'solid/shape2.dart';
+
+void main() {
+  var sequre = Shape();
+  sequre.heigth=220;
+  sequre.width=200;
+  print(sequre.heigth);
+  print(sequre.width);
+
+}
+```
+
+```
+Output
+220  200
+```
