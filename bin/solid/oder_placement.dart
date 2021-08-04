@@ -4,17 +4,11 @@ class OrderCalulator {
     this.price,
     this.shippingCharges,
   });
-
   final String id;
   final num price;
   final num shippingCharges;
-
   num totalPrice() {
     return price + shippingCharges;
-  }
-
-  void sendEmail() {
-    print('Sending email');
   }
 }
 
