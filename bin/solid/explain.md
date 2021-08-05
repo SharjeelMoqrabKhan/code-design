@@ -282,3 +282,163 @@ void main() {
 Output
 220  200
 ```
+
+# Interface segregation principle
+A client should never be forced to implement an interface that it doesn’t use or clients shouldn’t be forced to depend on methods they do not use.
+
+in this example we have abstract class of bird and it has some properties like see run and fly whicv is very obvious for brid class and we are implmenting this brid class for egle and kiwi which both are bird but kiwi can't fly technically and egle flies high level. So we have fly method in our abstract class for both, egle use fly method but kiwi can't so here we are breaking the interface segregation principle. if a method is used for technically work for the class don't segregate.
+
+
+```
+abstract class Brid{
+  void see();
+  void run();
+  void fly();
+}
+
+class Egle implements Brid{
+  @override
+  void fly() {
+    
+  }
+
+  @override
+  void run() {
+
+  }
+
+  @override
+  void see() {
+ 
+  }
+
+}
+
+class Kiwi implements Brid{
+  @override
+  void fly() {
+
+  }
+
+  @override
+  void run() {
+  
+  }
+
+  @override
+  void see() {
+   
+  }
+
+}
+```
+
+Now we are rid off the fly method from Bird class so reaming class won't implemented it and make a new abstract fly class and pass the fly method it and implents it with those class who may use it fly method.
+
+```
+abstract class Brid {
+  void see();
+  void run();
+}
+abstract class Fly{
+  void fly();
+}
+
+class Eagle implements Brid ,Fly {
+  @override
+  void run() {}
+
+  @override
+  void see() {}
+
+  @override
+  void fly() {
+   
+  }
+}
+
+class Kiwi implements Brid {
+  @override
+  void run() {}
+
+  @override
+  void see() {}
+}
+
+```
+# Dependency inversion principle
+
+```
+Entities must depend on abstractions not on concretions. It states that the high level module must not depend on the low level module, but they should depend on abstractions.
+```
+
+Suppose we have two classes one is service and second is database connetection. database connection is used for creating the connection for database. in service class we will use intance of database class like this.
+
+```
+class Service{
+DatabaseConnection connection = DatabaseConnection();
+void attach(){
+  connection.connect();
+}
+  
+}
+
+class DatabaseConnection{
+  void connect(){
+    print('Connecting Database');
+  }
+}
+
+import 'solid/conntection.dart';
+
+
+void main() {
+var db = Service();
+db.attach();
+}
+
+```
+
+suppose tommorow we have to change the database like firebase or anyother no sql so that we have to change in higher level in Serive class which is breaking the principle of Dependency inversion principle because high level(Service) module must not depend on the low level(Database connection) module but they should depend on abstractions.
+
+we can slove this by abstraction/interface.
+
+```
+class Service {
+  ConnectionInterface connection ;  
+  void attach() {
+    connection.connect();
+  }
+}
+
+abstract class ConnectionInterface {
+  void connect();
+}
+
+class Sql implements ConnectionInterface {
+  @override
+  void connect() {
+    print('Connecting to sql-server');
+  }
+}
+
+class NoSql implements ConnectionInterface {
+  @override
+  void connect() {
+    print('Connecting to Firebase');
+  }
+}
+import 'solid/conntection.dart';
+
+
+void main() {
+var db = Service();
+db.connection= NoSql();
+db.attach();
+}
+```
+
+so now we can't change in our higher module which is service cause we abstracted in interfaceConnection connection which defines what kind of connection will going to eastablish. Here we achieve the last principle of solid design Dependency inversion principle.
+
+# Conclusion
+Honestly, S.O.L.I.D might seem to be a handful at first, but with continuous usage and adherence to its guidelines, it becomes a part of you and your code which can easily be extended, modified, tested, and refactored without any problems
